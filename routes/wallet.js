@@ -1,13 +1,16 @@
 var router = require('koa-router')();
 
 var config = require('../config');
+var walletData = require('../test-data/wallet.json');
+var unauthorized = require('../test-data/unauthorized.json');
+
 router.get('/balance', function *(next) {
-  console.log(this.headers);
   if(this.headers['authorization'] === config.bearerToken){
-    this.body = 'authorized';
+    this.body = walletData;
   }
-  else{
-    this.body = 'unauthorized';
+  else {
+    this.status = 401;
+    this.body = unauthorized;
   }
 });
 

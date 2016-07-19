@@ -1,0 +1,5 @@
+{
+  "description": "Authorization header was missing",
+  "error": "Authorization Required",
+  "status_code": 401
+}
