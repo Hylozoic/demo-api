@@ -8,7 +8,7 @@ router.get('/', function *(next) {
     this.body = userDetails;
   }
   else {
-    this.status = 401;
+    this.status = config.unauthorized;
     this.body = unauthorized;
   }
 });

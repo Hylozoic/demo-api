@@ -1,15 +1,26 @@
 var router = require('koa-router')();
 
 var config = require('../config');
-var walletData = require('../test-data/wallet.json');
+var pending = require('../test-data/pending.json');
+var settled = require('../test-data/settled.json');
 var unauthorized = require('../test-data/unauthorized.json');
 
 router.get('/balance', function *(next) {
   if(this.headers['authorization'] === config.bearerToken){
-    this.body = walletData;
+    this.body = settled;
   }
   else {
-    this.status = 401;
+    this.status = config.unauthorized;
+    this.body = unauthorized;
+  }
+});
+
+router.get('/balance/pending', function *(next) {
+  if(this.headers['authorization'] === config.bearerToken){
+    this.body = pending;
+  }
+  else {
+    this.status = config.unauthorized;
     this.body = unauthorized;
   }
 });

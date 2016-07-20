@@ -8,6 +8,9 @@ var app = require('koa')()
 var index = require('./routes/index');
 var users = require('./routes/users');
 var wallet = require('./routes/wallet');
+var stabletoken = require('./routes/stabletoken');
+var securities = require('./routes/securities');
+var funding = require('./routes/funding');
 
 // global middlewares
 app.use(require('koa-bodyparser')());
@@ -27,6 +30,9 @@ app.use(require('koa-static')(__dirname + '/public'));
 koa.use('/', index.routes(), index.allowedMethods());
 koa.use('/users', users.routes(), users.allowedMethods());
 koa.use('/wallet', wallet.routes(), wallet.allowedMethods());
+koa.use('/stabletoken', stabletoken.routes(), stabletoken.allowedMethods());
+koa.use('/securities', securities.routes(), securities.allowedMethods());
+koa.use('/funding', funding.routes(), funding.allowedMethods());
 
 // mount root routes
 app.use(koa.routes());
