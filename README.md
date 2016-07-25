@@ -5,3 +5,8 @@ bash
 npm install
 nodemon
 ```
+
+to run the tests
+```
+newman -c RobinhoodHitfinAPITest.json
+```
