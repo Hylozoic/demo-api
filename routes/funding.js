@@ -8,12 +8,11 @@ var all = require('../test-data/all_orders.json');
 var details = require('../test-data/order_details.json');
 var rates = require('../test-data/funding_rates.json');
 
-router.post('/orders', function *(next, req) {
+router.post('/orders', function *(next) {
     if(this.headers['authorization'] === config.bearerToken) {
-        console.log (this.body.direction)
-        if (this.body.direction == config.buy) {
+        if (this.request.body['direction'] === config.buy) {
             this.body = buy;
-        } else if (this.body['direction'] == config.sell) {
+        } else if (this.request.body['direction'] === config.sell) {
             this.body = sell;
         } else {
             this.status = config.unauthorized;
@@ -24,7 +23,6 @@ router.post('/orders', function *(next, req) {
         this.body = unauthorized;
     }
 });
-
 
 router.get('/orders', function *(next) {
     if(this.headers['authorization'] === config.bearerToken){

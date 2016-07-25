@@ -1,0 +1,298 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Robinhood/Hitfin",
+		"_postman_id": "70b01a8d-110d-4a69-660f-88368a4a4152",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "hit the api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Body matches string\"] = responseBody.has(\"hello world\");"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get settled balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Wallet Address\"] = jsonData.address === \"fb6157e01e8dccf16c51e2a63bea89d4076d3cad\"\ntests[\"Wallet Balance\"] = jsonData.balance === 1987533800000000000"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/wallet/balance",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get Pending balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"pending address\"] = jsonData.address === \"fb6157e01e8dccf16c51e2a63bea89d4076d3cad\";\ntests[\"pending balance\"] = jsonData.balance === 1784929800000147000;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/wallet/balance/pending",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get user details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"user Id\"] = jsonData.id === 17;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get stabletoken balances",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"latest amount\"] = jsonData.latest.amount === 9000000000000000000;\ntests[\"latest amountAvailable\"] = jsonData.latest.amountAvailable === 9000000000000000000;\ntests[\"latest amountOnHold\"] = jsonData.latest.amountOnHold === 0;\ntests[\"pending amount\"] = jsonData.pending.amount === 8000000000000000000;\ntests[\"pending amountAvailable\"] = jsonData.pending.amountAvailable === 8000000000000000000;\ntests[\"pending amountOnHold\"] = jsonData.pending.amountOnHold === 0;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/stabletoken/balances",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "accept offer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Transaction from address\"] = jsonData.tx.from_address === \"c98429e8edbe13346daa12f44a0453cbe2805a65\";\ntests[\"transaction to address\"] = jsonData.tx.to_address === \"e7ae8d80668a7ac581500cd2002f81c1afa8b047\";\ntests[\"transaction Value\"] = jsonData.tx.value === 0;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/securities/offers/accept/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "buy order",
+			"request": {
+				"url": "localhost:3000/funding/orders",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"direction\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "sell order ",
+			"request": {
+				"url": "localhost:3000/funding/orders",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"direction\": 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get order details",
+			"request": {
+				"url": "localhost:3000/funding/orders/48",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get all order details ",
+			"request": {
+				"url": "localhost:3000/funding/orders",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Funding Rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"bitcoin rate\"] = jsonData.btc_rate_fiat === 360.77;\ntests[\"Ether rate\"] = jsonData.ether_rate_fiat === 1.2;\ntests[\"Stabletoken rate\"] = jsonData.stabletoken_rate_fiat === 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/funding/rates",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
