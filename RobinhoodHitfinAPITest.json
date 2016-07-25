@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Robinhood/Hitfin",
-		"_postman_id": "70b01a8d-110d-4a69-660f-88368a4a4152",
+		"_postman_id": "79cd4bdd-ff59-5370-35c6-2e4b40cd9b59",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -278,6 +278,35 @@
 			],
 			"request": {
 				"url": "localhost:3000/funding/rates",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Start HitFin oauth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Body has Token\"] = responseBody.has(\"AUTH_CODE_TO_OBTAIN_A_TOKEN\");"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/o/oauth2/auth",
 				"method": "GET",
 				"header": [
 					{
