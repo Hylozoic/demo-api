@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "co": "^4.6.0",
+    "co-views": "^2.1.0",
     "debug": "^2.2.0",
+    "ejs": "^2.4.2",
     "jade": "~1.11.0",
     "koa": "^1.1.2",
     "koa-bodyparser": "^2.0.1",
