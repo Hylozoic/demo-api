@@ -6,8 +6,8 @@ var accept = require('../test-data/accept_offer.json');
 
 router.get('/offers/accept/:id', function *(next, req) {
     if(this.headers['authorization'] === config.bearerToken && this.params.id == 1){
-
-        this.body = accept;
+      this.status = config.okResponse;
+      this.body = accept;
     }
     else {
         this.status = config.unauthorized;

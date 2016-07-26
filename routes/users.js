@@ -5,6 +5,7 @@ var unauthorized = require('../test-data/unauthorized.json');
 
 router.get('/', function *(next) {
   if(this.headers['authorization'] === config.bearerToken){
+    this.status = config.okResponse;
     this.body = userDetails;
   }
   else {

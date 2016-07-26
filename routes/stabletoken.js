@@ -6,7 +6,8 @@ var unauthorized = require('../test-data/unauthorized.json');
 
 router.get('/balances', function *(next) {
     if(this.headers['authorization'] === config.bearerToken){
-        this.body = stabletoken;
+      this.status = config.okResponse;
+      this.body = stabletoken;
     }
     else {
         this.status = config.unauthorized;
