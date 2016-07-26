@@ -11,8 +11,10 @@ var rates = require('../test-data/funding_rates.json');
 router.post('/orders', function *(next) {
     if(this.headers['authorization'] === config.bearerToken) {
         if (this.request.body['direction'] === config.buy) {
+            this.status = config.successfulPost;
             this.body = buy;
         } else if (this.request.body['direction'] === config.sell) {
+            this.status = config.successfulPost;
             this.body = sell;
         } else {
             this.status = config.unauthorized;
@@ -26,6 +28,7 @@ router.post('/orders', function *(next) {
 
 router.get('/orders', function *(next) {
     if(this.headers['authorization'] === config.bearerToken){
+        this.status = config.okResponse;
         this.body = all;
     } else {
         this.status = config.unauthorized;
@@ -35,6 +38,7 @@ router.get('/orders', function *(next) {
 
 router.get('/orders/:id', function *(next) {
     if(this.headers['authorization'] === config.bearerToken && this.params.id == config.orderId){
+        this.status = config.okResponse;
         this.body = details;
     } else {
         this.status = config.unauthorized;
@@ -44,6 +48,7 @@ router.get('/orders/:id', function *(next) {
 
 router.get('/rates', function *(next) {
     if(this.headers['authorization'] === config.bearerToken){
+        this.status = config.okResponse;
         this.body = rates;
     } else {
         this.status = config.unauthorized;
