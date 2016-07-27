@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Robinhood/Hitfin",
-		"_postman_id": "79cd4bdd-ff59-5370-35c6-2e4b40cd9b59",
+		"_postman_id": "4d3cd244-5c61-cca5-a53d-018f7a75608d",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -47,7 +47,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -76,7 +76,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -105,7 +105,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -134,7 +134,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -163,7 +163,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -177,13 +177,22 @@
 		},
 		{
 			"name": "buy order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;\nvar jsonData = JSON.parse(responseBody);\ntests[\"order id\"] = jsonData.id === 48;\ntests[\"order name\"] = jsonData.name === \"SUSD Purchase\";\ntests[\"order status\"] = jsonData.status === 1;"
+					}
+				}
+			],
 			"request": {
 				"url": "localhost:3000/funding/orders",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					},
 					{
@@ -202,13 +211,22 @@
 		},
 		{
 			"name": "sell order ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;\nvar jsonData = JSON.parse(responseBody);\ntests[\"order id\"] = jsonData.id === 50;\ntests[\"order name\"] = jsonData.name === \"SUSD Sale\";\ntests[\"order status\"] = jsonData.status === 5;"
+					}
+				}
+			],
 			"request": {
 				"url": "localhost:3000/funding/orders",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					},
 					{
@@ -227,13 +245,22 @@
 		},
 		{
 			"name": "get order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"order id\"] = jsonData.id === 48;\ntests[\"order name\"] = jsonData.name === \"SUSD Purchase\";\ntests[\"order status\"] = jsonData.status === 1;"
+					}
+				}
+			],
 			"request": {
 				"url": "localhost:3000/funding/orders/48",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -247,13 +274,22 @@
 		},
 		{
 			"name": "get all order details ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"first order id\"] = jsonData.funding_orders[0].id === 47;\ntests[\"first order name\"] = jsonData.funding_orders[0].name === \"SUSD Purchase\";\ntests[\"second order id\"] = jsonData.funding_orders[1].id === 48;\ntests[\"second order name\"] = jsonData.funding_orders[1].name === \"SUSD Purchase\";\n"
+					}
+				}
+			],
 			"request": {
 				"url": "localhost:3000/funding/orders",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -282,7 +318,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
@@ -301,7 +337,7 @@
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
-						"exec": "tests[\"Body has Token\"] = responseBody.has(\"AUTH_CODE_TO_OBTAIN_A_TOKEN\");\ntests[\"Body has Text\"] = responseBody.has (\"Authorise Hylo to connect to your hitfin account.\");"
+						"exec": "tests[\"Body has Token\"] = responseBody.has(\"AUTH_CODE_TO_OBTAIN_A_TOKEN\");"
 					}
 				}
 			],
@@ -311,7 +347,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer eyJhbGciOiJIUzUxMiIsImV4cCI6MTQ1MTYxNjg4MSwiaWF0IjoxNDQ5MTk3Njc2fQ.eyJ1c2VyX2lkIjoxNywiZW1haWwiOiJwczEwQHN0YWJsZXRva2VuLmNvbSJ9.Ca4suKvQGMzctYGUY6WHWzkcer7K8HTQjie4h0riXBr6_Ns4--UOHsw8hHfrgGjWaT6nttriPOXMvMrCkGkJXg",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
 						"description": ""
 					}
 				],
