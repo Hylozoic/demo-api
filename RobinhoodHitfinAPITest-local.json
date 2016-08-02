@@ -1,0 +1,363 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Robinhood/Hitfin",
+		"_postman_id": "4d3cd244-5c61-cca5-a53d-018f7a75608d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "hit the api",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Body matches string\"] = responseBody.has(\"hello world\");"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get settled balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Wallet Address\"] = jsonData.address === \"fb6157e01e8dccf16c51e2a63bea89d4076d3cad\"\ntests[\"Wallet Balance\"] = jsonData.balance === 1987533800000000000"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/wallet/balance",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get Pending balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"pending address\"] = jsonData.address === \"fb6157e01e8dccf16c51e2a63bea89d4076d3cad\";\ntests[\"pending balance\"] = jsonData.balance === 1784929800000147000;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/wallet/balance/pending",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get user details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"user Id\"] = jsonData.id === 17;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/users",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get stabletoken balances",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"latest amount\"] = jsonData.latest.amount === 9000000000000000000;\ntests[\"latest amountAvailable\"] = jsonData.latest.amountAvailable === 9000000000000000000;\ntests[\"latest amountOnHold\"] = jsonData.latest.amountOnHold === 0;\ntests[\"pending amount\"] = jsonData.pending.amount === 8000000000000000000;\ntests[\"pending amountAvailable\"] = jsonData.pending.amountAvailable === 8000000000000000000;\ntests[\"pending amountOnHold\"] = jsonData.pending.amountOnHold === 0;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/stabletoken/balances",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "accept offer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Transaction from address\"] = jsonData.tx.from_address === \"c98429e8edbe13346daa12f44a0453cbe2805a65\";\ntests[\"transaction to address\"] = jsonData.tx.to_address === \"e7ae8d80668a7ac581500cd2002f81c1afa8b047\";\ntests[\"transaction Value\"] = jsonData.tx.value === 0;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/securities/offers/accept/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "buy order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;\nvar jsonData = JSON.parse(responseBody);\ntests[\"order id\"] = jsonData.id === 48;\ntests[\"order name\"] = jsonData.name === \"SUSD Purchase\";\ntests[\"order status\"] = jsonData.status === 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/funding/orders",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"direction\": 1\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "sell order ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;\nvar jsonData = JSON.parse(responseBody);\ntests[\"order id\"] = jsonData.id === 50;\ntests[\"order name\"] = jsonData.name === \"SUSD Sale\";\ntests[\"order status\"] = jsonData.status === 5;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/funding/orders",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"direction\": 2\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get order details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"order id\"] = jsonData.id === 48;\ntests[\"order name\"] = jsonData.name === \"SUSD Purchase\";\ntests[\"order status\"] = jsonData.status === 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/funding/orders/48",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get all order details ",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"first order id\"] = jsonData.funding_orders[0].id === 47;\ntests[\"first order name\"] = jsonData.funding_orders[0].name === \"SUSD Purchase\";\ntests[\"second order id\"] = jsonData.funding_orders[1].id === 48;\ntests[\"second order name\"] = jsonData.funding_orders[1].name === \"SUSD Purchase\";\n"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/funding/orders",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Funding Rates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"bitcoin rate\"] = jsonData.btc_rate_fiat === 360.77;\ntests[\"Ether rate\"] = jsonData.ether_rate_fiat === 1.2;\ntests[\"Stabletoken rate\"] = jsonData.stabletoken_rate_fiat === 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/funding/rates",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Start HitFin oauth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "tests[\"Body has Token\"] = responseBody.has(\"AUTH_CODE_TO_OBTAIN_A_TOKEN\");"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/o/oauth2/auth",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

@@ -11,5 +11,5 @@ nodemon
 to run the tests
 ```
   npm install -g newman
-  newman -c RobinhoodHitfinAPITest.json
+  newman -c RobinhoodHitfinAPITest-local.json
 ```
