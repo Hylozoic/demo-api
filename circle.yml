@@ -5,4 +5,4 @@ deployment:
   staging:
     branch: master
     heroku:
-      app: hitfin-fake
+      appname: hitfin-fake
