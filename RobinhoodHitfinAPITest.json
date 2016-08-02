@@ -1,8 +1,8 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Robinhood/Hitfin",
-		"_postman_id": "4d3cd244-5c61-cca5-a53d-018f7a75608d",
+		"name": "Robinhood/Hitfin/heroku",
+		"_postman_id": "909cb23c-cec6-d209-afc1-eea4a52ddd05",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -19,7 +19,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/",
+				"url": "http://hitfin-fake.herokuapp.com/",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -42,7 +42,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/wallet/balance",
+				"url": "http://hitfin-fake.herokuapp.com/wallet/balance",
 				"method": "GET",
 				"header": [
 					{
@@ -71,7 +71,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/wallet/balance/pending",
+				"url": "http://hitfin-fake.herokuapp.com/wallet/balance/pending",
 				"method": "GET",
 				"header": [
 					{
@@ -100,7 +100,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/users",
+				"url": "http://hitfin-fake.herokuapp.com/users",
 				"method": "GET",
 				"header": [
 					{
@@ -129,7 +129,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/stabletoken/balances",
+				"url": "http://hitfin-fake.herokuapp.com/stabletoken/balances",
 				"method": "GET",
 				"header": [
 					{
@@ -158,7 +158,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/securities/offers/accept/1",
+				"url": "http://hitfin-fake.herokuapp.com/securities/offers/accept/1",
 				"method": "GET",
 				"header": [
 					{
@@ -187,7 +187,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders",
+				"url": "http://hitfin-fake.herokuapp.com/funding/orders",
 				"method": "POST",
 				"header": [
 					{
@@ -221,7 +221,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders",
+				"url": "http://hitfin-fake.herokuapp.com/funding/orders",
 				"method": "POST",
 				"header": [
 					{
@@ -255,7 +255,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders/48",
+				"url": "http://hitfin-fake.herokuapp.com/funding/orders/48",
 				"method": "GET",
 				"header": [
 					{
@@ -284,7 +284,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders",
+				"url": "http://hitfin-fake.herokuapp.com/funding/orders",
 				"method": "GET",
 				"header": [
 					{
@@ -313,7 +313,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/rates",
+				"url": "http://hitfin-fake.herokuapp.com/funding/rates",
 				"method": "GET",
 				"header": [
 					{
@@ -342,7 +342,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/o/oauth2/auth",
+				"url": "http://hitfin-fake.herokuapp.com/o/oauth2/auth",
 				"method": "GET",
 				"header": [
 					{
