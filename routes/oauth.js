@@ -25,7 +25,7 @@ var render = views(__dirname + '/../views', { ext: 'ejs' });
 
 
 router.get('/auth', function *(next) {
-  this.body= yield render('login', {callbackUrl: expectedAuth.redirect_uri + '?code=' + config.authCode});
+  this.body= yield render('login', {callbackUrl: this.query.redirect_uri + '?code=' + config.authCode});
 });
 
 router.post('/token',function * (next){
