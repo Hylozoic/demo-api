@@ -3,6 +3,7 @@ var config = require('../config');
 var views = require('co-views');
 var logger = require('koa-logger');
 var koa = require('koa');
+var authorized = require('../test-data/authorized.json');
 var app = module.exports = koa();
 
 var expectedTokenRequest = {
@@ -39,9 +40,7 @@ router.post('/token',function * (next){
       return;
     }else {
       if( body.code ===  config.authCode ){
-        this.body = {
-          "accessToken": config.bearerToken
-        }
+        this.body = authorized
       } else if(body.code ===  config.invalidAuthCode){
         this.status = 400;
         this.body = {error: 'unauthorized_client'}

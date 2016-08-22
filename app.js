@@ -31,10 +31,10 @@ app.use(require('koa-static')(__dirname + '/public'));
 // routes definition
 koa.use('/', index.routes(), index.allowedMethods());
 koa.use('/api/users', users.routes(), users.allowedMethods());
-koa.use('/wallet', wallet.routes(), wallet.allowedMethods());
-koa.use('/stabletoken', stabletoken.routes(), stabletoken.allowedMethods());
-koa.use('/securities', securities.routes(), securities.allowedMethods());
-koa.use('/funding', funding.routes(), funding.allowedMethods());
+koa.use('/api/wallet', wallet.routes(), wallet.allowedMethods());
+koa.use('/api/stabletoken', stabletoken.routes(), stabletoken.allowedMethods());
+koa.use('/api/securities', securities.routes(), securities.allowedMethods());
+koa.use('/api/funding', funding.routes(), funding.allowedMethods());
 koa.use('/oauth', oauth.routes());
 
 // mount root routes

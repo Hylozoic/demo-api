@@ -1,5 +1,5 @@
 module.exports = {
-  bearerToken: 'bearer e4b066b5d3422c5e0920260faf0b6d7f',
+  bearerToken: 'Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy',
   orderId: 48,
   buy: 1,
   sell: 2,

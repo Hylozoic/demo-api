@@ -5,7 +5,7 @@ var pending = require('../test-data/pending.json');
 var settled = require('../test-data/settled.json');
 var unauthorized = require('../test-data/unauthorized.json');
 
-router.get('/balance', function *(next) {
+router.get('/balances', function *(next) {
   if(this.headers['authorization'] === config.bearerToken){
     this.status = config.okResponse;
     this.body = settled;
