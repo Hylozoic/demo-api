@@ -8,8 +8,8 @@ var app = module.exports = koa();
 var expectedTokenRequest = {
   grant_type: 'authorization_code',
   code: config.authCode,
-  client_id: process.env.client_id,
-  client_secret: process.env.client_secret
+  client_id: config.client_id,
+  client_secret: config.client_secret
 }
 
 
