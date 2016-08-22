@@ -35,7 +35,7 @@ koa.use('/wallet', wallet.routes(), wallet.allowedMethods());
 koa.use('/stabletoken', stabletoken.routes(), stabletoken.allowedMethods());
 koa.use('/securities', securities.routes(), securities.allowedMethods());
 koa.use('/funding', funding.routes(), funding.allowedMethods());
-koa.use('/o/oauth2', oauth.routes());
+koa.use('/oauth', oauth.routes());
 
 // mount root routes
 app.use(koa.routes());

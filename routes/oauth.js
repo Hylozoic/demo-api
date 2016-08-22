@@ -17,7 +17,7 @@ var render = views(__dirname + '/../views', { ext: 'ejs' });
 
 
 
-router.get('/auth', function *(next) {
+router.get('/authorize', function *(next) {
   this.body= yield render('login', {
     callbackUrl: this.query.redirect_uri + '?code=' + config.authCode,
     failureUrl: this.query.redirect_uri + '?code=' + config.invalidAuthCode
