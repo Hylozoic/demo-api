@@ -40,7 +40,7 @@ router.post('/token',function * (next){
     }else {
       if( body.code ===  config.authCode ){
         this.body = {
-          "access_token": config.bearerToken
+          "accessToken": config.bearerToken
         }
       } else if(body.code ===  config.invalidAuthCode){
         this.status = 400;
