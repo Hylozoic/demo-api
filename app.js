@@ -30,7 +30,7 @@ app.use(function *(next){
 app.use(require('koa-static')(__dirname + '/public'));
 // routes definition
 koa.use('/', index.routes(), index.allowedMethods());
-koa.use('/users', users.routes(), users.allowedMethods());
+koa.use('/api/users', users.routes(), users.allowedMethods());
 koa.use('/wallet', wallet.routes(), wallet.allowedMethods());
 koa.use('/stabletoken', stabletoken.routes(), stabletoken.allowedMethods());
 koa.use('/securities', securities.routes(), securities.allowedMethods());
