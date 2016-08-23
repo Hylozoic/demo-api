@@ -1,29 +1,25 @@
 var router = require('koa-router')();
-
 var config = require('../../config');
-var unauthorized = require('../../test-data/unauthorized.json');
-var accept = require('../../test-data/accept_offer.json');
-var accept_partial = require('../../test-data/accept_partial_offer.json');
+var Offers = require('../../services/offers')
+const TransactionHelper = require('./../../services/transaction-helper');
 
-router.get('/accept/:id', function *(next, req) {
-    if(this.headers['authorization'] === config.bearerToken && this.params.id == 1){
-      this.status = config.okResponse;
-      this.body = accept;
-    }
-    else {
-        this.status = config.unauthorized;
-        this.body = unauthorized;
-    }
+router.post('/sell', function *(next) {
+  const body = this.request.body
+  const hash = TransactionHelper.generateTransactionHash()
+  const offerId = TransactionHelper.generateBigInt()
+  const res = Offers.create(body.issueId, offerId, body.num_shares, body.price, hash);
+
+  this.status = config.okResponse;
+  this.body = res;
 });
 
-router.get('/accept/partial/:offerId/:numShares', function * (next, req) {
-  if(this.headers['authorization'] === config.bearerToken && this.params.offerId == 1) {
-    this.status = config.okResponse;
-    this.body = accept_partial;
-  }
-  else {
-      this.status = config.unauthorized;
-      this.body = unauthorized;
-  }
+router.get('/accept/partial/:offerId/:numShares', function * (next) {
+  const params = this.params
+  const hash = TransactionHelper.generateTransactionHash()
+  const holdingId = TransactionHelper.generateBigInt
+
+  this.status = config.okResponse;
+  this.body = yield Offers.acceptPartial(params.offerId, params.numShares, holdingId, hash);
 });
+
 module.exports = router;

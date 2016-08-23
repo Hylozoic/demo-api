@@ -147,35 +147,6 @@
 			"response": []
 		},
 		{
-			"name": "accept offer",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Transaction from address\"] = jsonData.tx.from_address === \"c98429e8edbe13346daa12f44a0453cbe2805a65\";\ntests[\"transaction to address\"] = jsonData.tx.to_address === \"e7ae8d80668a7ac581500cd2002f81c1afa8b047\";\ntests[\"transaction Value\"] = jsonData.tx.value === 0;"
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:3000/api/securities/offers/accept/1",
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "buy order",
 			"event": [
 				{
@@ -373,35 +344,6 @@
 			"request": {
 				"url": "localhost:3000/api/funding/rates",
 				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
-						"description": ""
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "create issue",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"Transaction Hash\"] = jsonData.hash === \"0xc9d9c50e955d175b310c4cf120dd2ca4035172a57377bc9da9e270f5d1230b16\";"
-					}
-				}
-			],
-			"request": {
-				"url": "localhost:3000/api/securities/issues",
-				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",

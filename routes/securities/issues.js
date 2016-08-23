@@ -1,19 +1,21 @@
 var router = require('koa-router')();
-var accept = require('../../test-data/accept_offer.json');
 var config = require('../../config');
+var Issues = require('../../services/issues')
+const TransactionHelper = require('./../../services/transaction-helper');
 
-router.post('/', function *(next, req) {
-    this.status = config.okResponse;
-    this.body = {
-      "hash" : "0xc9d9c50e955d175b310c4cf120dd2ca4035172a57377bc9da9e270f5d1230b16"
-    };
+router.post('/', function *(next) {
+  const body = this.request.body
+  const hash = TransactionHelper.generateTransactionHash()
+  const issueId = TransactionHelper.generateBigInt()
+  const res = Issues.create(body.num_shares, hash, issueId);
+
+  this.status = config.okResponse;
+  this.body = res
 });
 
-router.get('/:id', function *(next, req) {
-    this.status = config.okResponse;
-    this.body = {
-      "id" : id
-    };
+router.get('/:id', function *(next) {
+  this.status = config.okResponse;
+  this.body = yield Issues.get(this.params.id)
 });
 
 module.exports = router;
