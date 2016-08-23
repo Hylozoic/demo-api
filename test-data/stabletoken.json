@@ -1,12 +1,12 @@
 {
   "latest": {
-    "amount": 9000000000000000000,
-    "amountAvailable": 9000000000000000000,
+    "amount": 9000000000000000000000,
+    "amountAvailable": 9000000000000000000000,
     "amountOnHold": 0
   },
   "pending": {
-    "amount": 8000000000000000000,
-    "amountAvailable": 8000000000000000000,
+    "amount": 8000000000000000000000,
+    "amountAvailable": 8000000000000000000000,
     "amountOnHold": 0
   }
 }
