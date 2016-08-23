@@ -1,9 +1,9 @@
 var router = require('koa-router')();
 
-var config = require('../config');
-var unauthorized = require('../test-data/unauthorized.json');
-var accept = require('../test-data/accept_offer.json');
-var accept_partial = require('../test-data/accept_partial_offer.json');
+var config = require('../../config');
+var unauthorized = require('../../test-data/unauthorized.json');
+var accept = require('../../test-data/accept_offer.json');
+var accept_partial = require('../../test-data/accept_partial_offer.json');
 
 router.get('/accept/:id', function *(next, req) {
     if(this.headers['authorization'] === config.bearerToken && this.params.id == 1){

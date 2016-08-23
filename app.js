@@ -10,7 +10,8 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var wallet = require('./routes/wallet');
 var stabletoken = require('./routes/stabletoken');
-var securities = require('./routes/securities');
+var offers = require('./routes/securities/offers');
+var issues = require('./routes/securities/issues');
 var funding = require('./routes/funding');
 var oauth = require('./routes/oauth');
 
@@ -33,7 +34,8 @@ koa.use('/', index.routes(), index.allowedMethods());
 koa.use('/api/users', users.routes(), users.allowedMethods());
 koa.use('/api/wallet', wallet.routes(), wallet.allowedMethods());
 koa.use('/api/stabletoken', stabletoken.routes(), stabletoken.allowedMethods());
-koa.use('/api/securities', securities.routes(), securities.allowedMethods());
+koa.use('/api/securities/offers', offers.routes(), offers.allowedMethods());
+koa.use('/api/securities/issues', issues.routes(), issues.allowedMethods());
 koa.use('/api/funding', funding.routes(), funding.allowedMethods());
 koa.use('/oauth', oauth.routes());
 
