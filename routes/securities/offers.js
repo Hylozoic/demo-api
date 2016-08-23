@@ -5,7 +5,7 @@ var unauthorized = require('../test-data/unauthorized.json');
 var accept = require('../test-data/accept_offer.json');
 var accept_partial = require('../test-data/accept_partial_offer.json');
 
-router.get('/offers/accept/:id', function *(next, req) {
+router.get('/accept/:id', function *(next, req) {
     if(this.headers['authorization'] === config.bearerToken && this.params.id == 1){
       this.status = config.okResponse;
       this.body = accept;
@@ -16,7 +16,7 @@ router.get('/offers/accept/:id', function *(next, req) {
     }
 });
 
-router.get('/offers/accept/partial/:offerId/:numShares', function * (next, req) {
+router.get('/accept/partial/:offerId/:numShares', function * (next, req) {
   if(this.headers['authorization'] === config.bearerToken && this.params.offerId == 1) {
     this.status = config.okResponse;
     this.body = accept_partial;
