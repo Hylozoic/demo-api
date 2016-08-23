@@ -1,8 +1,8 @@
 {
 	"variables": [],
 	"info": {
-		"name": "Robinhood/Hitfin",
-		"_postman_id": "4d3cd244-5c61-cca5-a53d-018f7a75608d",
+		"name": "Robinhood/Hitfin/heroku",
+		"_postman_id": "0386eda7-1b2c-0c0e-86d8-d256efaa718b",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -42,12 +42,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/wallet/balance",
+				"url": "localhost:3000/api/wallet/balances",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -71,12 +71,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/wallet/balance/pending",
+				"url": "localhost:3000/api/wallet/balance/pending",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -100,12 +100,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/users",
+				"url": "localhost:3000/api/users",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -124,17 +124,17 @@
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
-						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"latest amount\"] = jsonData.latest.amount === 9000000000000000000;\ntests[\"latest amountAvailable\"] = jsonData.latest.amountAvailable === 9000000000000000000;\ntests[\"latest amountOnHold\"] = jsonData.latest.amountOnHold === 0;\ntests[\"pending amount\"] = jsonData.pending.amount === 8000000000000000000;\ntests[\"pending amountAvailable\"] = jsonData.pending.amountAvailable === 8000000000000000000;\ntests[\"pending amountOnHold\"] = jsonData.pending.amountOnHold === 0;"
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"latest amount\"] = jsonData.latest.amount === 9000000000000000000000;\ntests[\"latest amountAvailable\"] = jsonData.latest.amountAvailable === 9000000000000000000000;\ntests[\"latest amountOnHold\"] = jsonData.latest.amountOnHold === 0;\ntests[\"pending amount\"] = jsonData.pending.amount === 8000000000000000000000;\ntests[\"pending amountAvailable\"] = jsonData.pending.amountAvailable === 8000000000000000000000;\ntests[\"pending amountOnHold\"] = jsonData.pending.amountOnHold === 0;"
 					}
 				}
 			],
 			"request": {
-				"url": "localhost:3000/stabletoken/balances",
+				"url": "localhost:3000/api/stabletoken/balances",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -158,12 +158,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/securities/offers/accept/1",
+				"url": "localhost:3000/api/securities/offers/accept/1",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -187,12 +187,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders",
+				"url": "localhost:3000/api/funding/orders",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					},
 					{
@@ -221,12 +221,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders",
+				"url": "localhost:3000/api/funding/orders",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					},
 					{
@@ -255,12 +255,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders/48",
+				"url": "localhost:3000/api/funding/orders/48",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -284,12 +284,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/orders",
+				"url": "localhost:3000/api/funding/orders",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -313,12 +313,12 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/funding/rates",
+				"url": "localhost:3000/api/funding/rates",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
@@ -342,12 +342,41 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/o/oauth2/auth",
+				"url": "localhost:3000/oauth/authorize",
 				"method": "GET",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "e4b066b5d3422c5e0920260faf0b6d7f",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Funding Rates copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"bitcoin rate\"] = jsonData.btc_rate_fiat === 360.77;\ntests[\"Ether rate\"] = jsonData.ether_rate_fiat === 1.2;\ntests[\"Stabletoken rate\"] = jsonData.stabletoken_rate_fiat === 1;"
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:3000/api/funding/rates",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 8SXHX0jqRAWs2El7iO86AKsWEyesuy",
 						"description": ""
 					}
 				],
