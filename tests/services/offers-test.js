@@ -22,7 +22,7 @@ describe('Offers', function () {
   it('create an offer', function () {
     var hash = TransactionHelper.generateTransactionHash()
     const res = Offers.create(issueId, offerId, numShares, price, hash)
-    expect(res.hash).to.equal('0x' + hash)
+    expect(res.tx.hash).to.equal('0x' + hash)
     ApplicationStore.getLog(hash).then((log) => {
       expect(log.data.offerId).to.equal(offerId)
       ApplicationStore.getOffer(offerId).then((offer) => {
