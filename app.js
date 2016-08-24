@@ -43,7 +43,7 @@ koa.use('/api/securities/syndicate', syndicate.routes(), syndicate.allowedMethod
 koa.use('/api/logs', logs.routes(), logs.allowedMethods());
 
 koa.use('/api/funding', funding.routes(), funding.allowedMethods());
-koa.use('/oauth', oauth.routes());
+koa.use('/oauth', oauth.routes(), oauth.allowedMethods);
 
 // mount root routes
 app.use(koa.routes());

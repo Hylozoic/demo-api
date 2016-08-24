@@ -95,7 +95,7 @@
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
-						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"user Id\"] = jsonData.id === 17;"
+						"exec": "var jsonData = JSON.parse(responseBody);\ntests[\"user Id\"] = jsonData.id === 78;"
 					}
 				}
 			],
@@ -308,12 +308,12 @@
 					"listen": "test",
 					"script": {
 						"type": "text/javascript",
-						"exec": "tests[\"Body has Token\"] = responseBody.has(\"AUTH_CODE_TO_OBTAIN_A_TOKEN\");"
+						"exec": "tests[\"Body has Token\"] = responseBody.has(\"AUTH_CODE_TO_OBTAIN_A_CONTRIBUTOR_TOKEN\");"
 					}
 				}
 			],
 			"request": {
-				"url": "localhost:3000/oauth/authorize",
+				"url": "localhost:3000/oauth/authorise",
 				"method": "GET",
 				"header": [
 					{
