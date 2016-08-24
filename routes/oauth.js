@@ -16,6 +16,12 @@ var expectedTokenRequest = {
   client_secret: config.client_secret
 }
 
+var syndicateTokenRequest = {
+  grant_type: 'client_credentials',
+  client_id: config.client_id,
+  client_secret: config.client_secret
+}
+
 
 var render = views(__dirname + '/../views', { ext: 'ejs' });
 
@@ -32,7 +38,13 @@ router.get('/authorise', function *(next) {
 
 router.post('/token',function * (next){
     var body = this.request.body;
-    if(
+    if(body.client_id === expectedTokenRequest.client_id ||
+    body.grant_type === syndicateTokenRequest.grant_type ||
+    body.client_secret !== expectedTokenRequest.client_secret) 
+    {
+      this.body = manager_authorised
+    }
+    else if(
           body.client_id !== expectedTokenRequest.client_id ||
           body.grant_type !== expectedTokenRequest.grant_type ||
           body.client_secret !== expectedTokenRequest.client_secret
@@ -46,8 +58,6 @@ router.post('/token',function * (next){
     }else {
       if( body.code ===  config.contributorAuthCode ){
         this.body = contributor_authorised
-      } else if ( body.code === config.managerAuthCode ){
-        this.body = manager_authorised
       } else if (body.code === config.ownerAuthCode ) {
         this.body = owner_authorised
       } else if(body.code ===  config.invalidAuthCode){
