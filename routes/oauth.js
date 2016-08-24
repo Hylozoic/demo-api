@@ -40,7 +40,7 @@ router.post('/token',function * (next){
     var body = this.request.body;
     if(body.client_id === expectedTokenRequest.client_id ||
     body.grant_type === syndicateTokenRequest.grant_type ||
-    body.client_secret !== expectedTokenRequest.client_secret) 
+    body.client_secret === expectedTokenRequest.client_secret) 
     {
       this.body = manager_authorised
     }
