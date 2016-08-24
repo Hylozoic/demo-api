@@ -1,0 +1,18 @@
+{
+  "accepted": false,
+  "canceled": false,
+  "expirationDate": 1464855939,
+  "id": 1,
+  "issueId": 1,
+  "issuer_email": "bob@hitfin.com",
+  "issuer_first_name": "Bob",
+  "issuer_last_name": "User",
+  "issuer_full_name": "Bob User",
+  "issuer_id": 20,
+  "numShares": 104,
+  "offeree": "0000000000000000000000000000000000000000",
+  "offeror": "dc54d4c21f9b2024dbbc837c16e8bb70e753011e",
+  "price": 30000000000000000000,
+  "public": true,
+  "rejected": false
+}
