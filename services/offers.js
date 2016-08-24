@@ -45,7 +45,9 @@ module.exports = {
              }
              ApplicationStore.setLog(hash, log)
              return {
-               'hash': '0x' + hash
+               "tx": {
+                 "hash": '0x' + hash
+               }
              }
           }, (error) => {throw error}
         )

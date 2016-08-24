@@ -14,8 +14,6 @@ describe('Offers', function () {
     price = 0.01
     issueId = TransactionHelper.generateBigInt()
     offerId = TransactionHelper.generateBigInt()
-    console.log(issueId)
-    console.log(offerId)
     Issues.create(numShares, TransactionHelper.generateTransactionHash(), issueId)
   })
 
@@ -41,7 +39,7 @@ describe('Offers', function () {
     const holdingId = TransactionHelper.generateBigInt()
     const numSharesAccept = 100
     Offers.acceptPartial(offerId, numSharesAccept, holdingId, hash).then((res) => {
-      expect(res.hash).to.equal('0x' + hash)
+      expect(res.tx.hash).to.equal('0x' + hash)
       ApplicationStore.getLog(hash).then((log) => {
         expect(log.data.id).to.equal(holdingId)
         ApplicationStore.getIssue(issueId).then((issue) => {
