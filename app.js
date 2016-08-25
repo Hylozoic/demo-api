@@ -23,12 +23,21 @@ app.use(json());
 app.use(logger());
 app.use(logEverything());
 
-app.use(function *(next){
-  var start = new Date;
-  yield next;
-  var ms = new Date - start;
-  console.log('%s %s - %s', this.method, this.url, ms);
+app.use(function *(next) {
+  try {
+    var start = new Date;
+    yield next;
+    var ms = new Date - start;
+    console.log('%s %s - %s', this.method, this.url, ms);
+    yield next;
+  } catch (err) {
+    console.error(err)
+    this.status = err.status || 500;
+    this.body = err.message;
+    this.app.emit('error', err, this);
+  }
 });
+
 
 app.use(require('koa-static')(__dirname + '/public'));
 // routes definition
@@ -43,7 +52,7 @@ koa.use('/api/securities/syndicate', syndicate.routes(), syndicate.allowedMethod
 koa.use('/api/logs', logs.routes(), logs.allowedMethods());
 
 koa.use('/api/funding', funding.routes(), funding.allowedMethods());
-koa.use('/oauth', oauth.routes(), oauth.allowedMethods);
+koa.use('/oauth', oauth.routes());
 
 // mount root routes
 app.use(koa.routes());
