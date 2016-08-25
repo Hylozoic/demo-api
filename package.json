@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "newman -c RobinhoodHitfinAPITest-local.json && mocha tests --recursive"
+    "test": "mocha tests --recursive",
+    "newman": "newman -c RobinhoodHitfinAPITest-local.json"
   },
   "dependencies": {
     "bluebird": "^3.4.1",
