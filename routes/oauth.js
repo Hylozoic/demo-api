@@ -10,7 +10,7 @@ var owner_authorised = require('../test-data/owner_authorised.json');
 var app = module.exports = koa();
 
 var expectedTokenRequest = {
-  grant_type: ['authorization_code', 'client_credentials'],
+  grant_type: 'authorization_code',
   code: config.authCode,
   client_id: config.client_id,
   client_secret: config.client_secret
@@ -39,15 +39,15 @@ router.post('/token', function * (next) {
     body = this.query // backward support for hitfin since it only supports to put all the para in the query string
   }
 
-  if (body.client_id === syndicateTokenRequest.client_id ||
-    body.grant_type === syndicateTokenRequest.grant_type ||
+  if (body.client_id === syndicateTokenRequest.client_id &&
+    body.grant_type === syndicateTokenRequest.grant_type &&
     body.client_secret === syndicateTokenRequest.client_secret) {
     this.status = 200
     this.body = manager_authorised
   }
   else if (
     body.client_id !== expectedTokenRequest.client_id ||
-    (!expectedTokenRequest.grant_type.includes(body.grant_type)) ||
+    body.grant_type !== expectedTokenRequest.grant_type ||
     body.client_secret !== expectedTokenRequest.client_secret
   ) {
     console.log("error request didn't match expected results.")
@@ -61,6 +61,8 @@ router.post('/token', function * (next) {
       this.body = contributor_authorised
     } else if (body.code === config.ownerAuthCode) {
       this.body = owner_authorised
+    } else if (body.code === config.managerAuthCode) {
+      this.body = manager_authorised
     } else if (body.code === config.invalidAuthCode) {
       this.status = 400
       this.body = {error: 'unauthorised_client'}

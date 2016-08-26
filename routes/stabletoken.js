@@ -4,13 +4,22 @@ var config = require('../config');
 var stabletoken = require('../test-data/stabletoken.json')
 var authorised = require('./authorise')
 var unauthorised = require('../test-data/unauthorised.json');
+var wallet = require('../services/wallet')
+
+function getUserWallet (userId) {
+  console.log('getUser')
+  return wallet.getWallet(userId)
+}
 
 router.get('/balances', function *(next) {
-    if(authorised.isAuthorised(this.headers['authorization'])){
-      this.status = config.okResponse;
-      this.body = stabletoken;
-    }
-    else {
+  var bearer = this.headers['authorization'];
+  if (bearer === config.ContributorBearerToken) {
+    this.body = (yield getUserWallet(49)).walletDetails
+  } else if (bearer === config.OwnerBearerToken) {
+    this.body = (yield getUserWallet(78)).walletDetails
+  } else if (bearer === config.ManagerBearerToken) {
+    this.body = (yield getUserWallet(9)).walletDetails
+  } else {
         this.status = config.unauthorised;
         this.body = unauthorised;
     }

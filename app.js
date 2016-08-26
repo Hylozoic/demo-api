@@ -4,6 +4,7 @@ var app = require('koa')()
   , json = require('koa-json')
   , views = require('koa-views')
   , onerror = require('koa-onerror')
+  , demoWallet = require('./services/wallet')
   , logEverything = require('./middleware/log-everything');
 
 var index = require('./routes/index');
@@ -22,6 +23,7 @@ app.use(require('koa-bodyparser')());
 app.use(json());
 app.use(logger());
 app.use(logEverything());
+demoWallet.createDemoWallets();
 
 app.use(function *(next) {
   try {

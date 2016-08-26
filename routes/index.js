@@ -1,7 +1,10 @@
 var router = require('koa-router')();
+var wallet = require('../services/wallet')
 
 router.get('/', function *(next) {
-  this.body = 'hello world';
+  console.log('create')
+  wallet.createDemoWallets();
+  this.body = 'created';
 });
 
 module.exports = router;

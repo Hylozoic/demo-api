@@ -6,6 +6,7 @@ const NAME_ISSUES = 'issues'
 const NAME_OFFERS = 'offers'
 const NAME_LOGS = 'logs'
 const NAME_SYNDICATE = 'syndicate'
+const NAME_WALLET = 'wallet'
 
 const getRedisClient = function () {
   const url = process.env.REDIS_URL || 'redis://localhost:6379'
@@ -77,5 +78,13 @@ module.exports = {
 
   getLog: function (hash){
     return this.get(NAME_LOGS, hash)
+  },
+
+  setWallet: function (userId, wallet) {
+    this.set(NAME_WALLET, userId, wallet)
+  },
+
+  getWallet: function (userId) {
+    return this.get(NAME_WALLET, userId)
   }
 }

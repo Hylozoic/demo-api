@@ -3,8 +3,7 @@ var config = require('../config');
 var userDetails = require('../test-data/user-details.json');
 var unauthorised = require('../test-data/unauthorised.json');
 
-function getUser(type) {
-  console.log("here")
+function getUserByType(type) {
   for (var i = 0; i < 3; i++) {
     if(userDetails.users[i].last_name === type) {
       return userDetails.users[i]
@@ -14,11 +13,11 @@ function getUser(type) {
 
 router.get('/', function *(next) {
   if(this.headers['authorization'] === config.OwnerBearerToken){
-    this.body = getUser('Owner');
+    this.body = getUserByType('Owner');
   } else if(this.headers['authorization'] === config.ContributorBearerToken){
-    this.body = getUser('Contributor');
+    this.body = getUserByType('Contributor');
   } else if(this.headers['authorization'] === config.ManagerBearerToken){
-    this.body = getUser('Manager');
+    this.body = getUserByType('Manager');
   } else {
     this.status = config.unauthorised;
     this.body = unauthorised;
