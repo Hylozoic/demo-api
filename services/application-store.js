@@ -16,20 +16,23 @@ const getRedisClient = function () {
   return client
 }
 
-const client = getRedisClient()
-
 module.exports = {
   get: function(redisKey, redisHash){
+    const client = getRedisClient()
     return client.hmgetAsync(redisKey, redisHash).then(
       (res) => {
+        client.quit()
         if (res) {
           return JSON.parse(res)
         }
+        return null
       })
   },
 
   set: function(redisKey, redisHash, obj){
+    const client = getRedisClient()
     client.hset(redisKey, redisHash, JSON.stringify(obj))
+    client.quit()
   },
 
   getUser: function (username) {
