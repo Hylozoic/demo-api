@@ -17,6 +17,7 @@ var syndicate = require('./routes/securities/syndicate')
 var logs = require('./routes/logs')
 var funding = require('./routes/funding');
 var oauth = require('./routes/oauth');
+var sleep = require('koa-sleep')
 
 // global middlewares
 app.use(require('koa-bodyparser')());
@@ -42,6 +43,10 @@ app.use(function *(next) {
 
 
 app.use(require('koa-static')(__dirname + '/public'));
+
+//If you would like to configure all the api call to sleep for a bit to test the real world scenario, you can uncomment this.
+//app.use(sleep(1000));
+
 // routes definition
 koa.use('/', index.routes(), index.allowedMethods());
 koa.use('/api/users', users.routes(), users.allowedMethods());
