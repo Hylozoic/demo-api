@@ -25,7 +25,7 @@ router.get('/accept/partial/:offerId/:numShares', function * (next) {
 router.delete('/cancel/:offerId', function * (next){
   const hash = TransactionHelper.generateTransactionHash()
   this.status = config.okResponse;
-  this.body = yield Offers.cancel(params.offerId, hash)
+  this.body = yield Offers.cancel(this.params.offerId, hash)
 });
 
 module.exports = router;
