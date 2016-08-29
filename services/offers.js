@@ -1,4 +1,5 @@
 const ApplicationStore = require('./application-store')
+const wallet = require('./wallet')
 
 module.exports = {
   create: function (issueId, offerId, numShares, price, hash) {
@@ -22,7 +23,7 @@ module.exports = {
     }
   },
 
-  acceptPartial: function(offerId, numShares, holdingId, hash){
+  acceptPartial: function(userId, offerId, numShares, holdingId, hash){
     return ApplicationStore.getOffer(offerId)
       .then((offer) => {
         return ApplicationStore.getIssue(offer.issueId).then(
@@ -31,12 +32,13 @@ module.exports = {
                issue.all_holdings = []
              }
              const holding = {
-                "holder": "projectContributor",
+                "holder": userId,
                 "id": holdingId,
                 "issueId": offer.issueId,
                 "numShares": numShares
              }
              issue.all_holdings.push(holding)
+             wallet.updateWallet(userId, numShares, 'out')
              ApplicationStore.setIssue(offer.issueId, issue)
              const log = {
                "data": {

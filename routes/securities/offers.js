@@ -14,12 +14,24 @@ router.post('/sell', function *(next) {
 });
 
 router.get('/accept/partial/:offerId/:numShares', function * (next) {
+  var bearer = this.headers['authorization'];
+  var userId;
+  if (bearer === config.ContributorBearerToken) {
+    userId = 49
+  } else if (bearer === config.OwnerBearerToken) {
+    userId = 78
+  } else if (bearer === config.ManagerBearerToken) {
+    user_id = 9
+  } else {
+    this.status = config.unauthorised;
+    this.body = unauthorised;
+  }
   const params = this.params
   const hash = TransactionHelper.generateTransactionHash()
   const holdingId = TransactionHelper.generateBigInt()
 
   this.status = config.okResponse;
-  this.body = yield Offers.acceptPartial(params.offerId, params.numShares, holdingId, hash);
+  this.body = yield Offers.acceptPartial(userId, params.offerId, params.numShares, holdingId, hash);
 });
 
 router.delete('/cancel/:offerId', function * (next){

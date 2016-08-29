@@ -7,7 +7,6 @@ var unauthorised = require('../test-data/unauthorised.json');
 var wallet = require('../services/wallet')
 
 function getUserWallet (userId) {
-  console.log('getUser')
   return wallet.getWallet(userId)
 }
 
