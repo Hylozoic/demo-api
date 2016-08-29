@@ -32,12 +32,13 @@ module.exports = {
 
   updateWallet : function (user_id, amount, direction) {
     return ApplicationStore.getWallet(user_id).then( (wallet) => {
-      const etherAmount = amount * 10000000000000000
+      var etherAmount = amount * 10000000000000000
       var balance;
       if (direction === 'out') {
         balance = wallet.walletDetails.latest.amount - etherAmount
         create(wallet.walletId, user_id, balance)
-      } else if (direction === 'out') {
+      } else if (direction === 'in') {
+        etherAmount = etherAmount * 100
         balance = wallet.walletDetails.latest.amount + etherAmount
         create(wallet.walletId, user_id, balance)
       }

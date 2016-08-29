@@ -11,28 +11,18 @@ function getUserWallet (userId) {
   return wallet.getWallet(userId)
 }
 
-router.get('/balances', function *(next) {
+router.post('/onboard-funds', function *(next) {
+  var amount = this.headers['amount']
   var bearer = this.headers['authorization'];
-  if (bearer === config.contributorAuthCode) {
-    this.body = getUserWallet(49)
-  } else if (bearer === config.ownerAuthCode) {
-    this.body = getUserWallet(78)
-  } else if (bearer === config.managerAuthCode) {
-    this.body = getUserWallet(9);
-  } else {
-    this.status = config.unauthorised;
-    this.body = unauthorised;
-  }
-});
-
-router.get('/balance/pending', function *(next) {
-  var bearer = this.headers['authorization'];
-  if (bearer === config.contributorAuthCode) {
-    this.body = getUserWallet(49)
-  } else if (bearer === config.ownerAuthCode) {
-    this.body = getUserWallet(78)
-  } else if (bearer === config.managerAuthCode) {
-    this.body = getUserWallet(9);
+  if (bearer === config.ContributorBearerTokenCode) {
+    yield wallet.updateWallet(49, amount, 'in')
+    this.status = 200
+  } else if (bearer === config.OwnerBearerToken) {
+    yield wallet.updateWallet(78, amount, 'in')
+    this.status = 200
+  } else if (bearer === config.ManagerBearerToken) {
+    yield wallet.updateWallet(9, amount, 'in')
+    this.status = 200
   } else {
     this.status = config.unauthorised;
     this.body = unauthorised;
