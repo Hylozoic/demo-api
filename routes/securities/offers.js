@@ -22,4 +22,10 @@ router.get('/accept/partial/:offerId/:numShares', function * (next) {
   this.body = yield Offers.acceptPartial(params.offerId, params.numShares, holdingId, hash);
 });
 
+router.delete('/cancel/:offerId', function * (next){
+  const hash = TransactionHelper.generateTransactionHash()
+  this.status = config.okResponse;
+  this.body = yield Offers.cancel(params.offerId, hash)
+});
+
 module.exports = router;

@@ -52,5 +52,36 @@ module.exports = {
           }, (error) => {throw error}
         )
       }, (error) => {throw error})
+  },
+
+  cancel: function(offerId, hash){
+    return ApplicationStore.getOffer(offerId)
+      .then((offer) => {
+        return ApplicationStore.getIssue(offer.issueId).then(
+          (issue) =>{
+             if(!issue.all_holdings){
+               const all_holdings = issue.all_holdings
+               issue.all_holdings = null
+               ApplicationStore.setIssue(offer.issueId, issue);
+               all_holdings.forEach(function(holding){
+                 console.log('cancel holding from ' + holding.holder + ':' + holding.holdingId)
+                 //remove the wallet of each holder
+               })
+             }
+
+             const log = {
+               "data": {
+                 "id": offerId
+               }
+             }
+             ApplicationStore.setLog(hash, log)
+             return {
+               "tx": {
+                 "hash": '0x' + hash
+               }
+             }
+          }, (error) => {throw error}
+        )
+      }, (error) => {throw error})
   }
 }
