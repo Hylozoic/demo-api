@@ -13,7 +13,7 @@ describe('ApplicationStore', function () {
 
     ApplicationStore.setUser(user.username, user);
 
-    ApplicationStore.getUser(user.username)
+    return ApplicationStore.getUser(user.username)
     .then(function(data) {
       expect(data.username).to.equal(user.username);
       expect(data.password).to.equal(user.password);
@@ -29,7 +29,7 @@ describe('ApplicationStore', function () {
 
     ApplicationStore.setIssue(issue.id, issue);
 
-    ApplicationStore.getIssue(issue.id)
+    return ApplicationStore.getIssue(issue.id)
     .then(function(data) {
       expect(data.id).to.equal(issue.id);
       expect(data.numShares).to.equal(issue.numShares);

@@ -1,5 +1,6 @@
 const ApplicationStore = require('./application-store')
-const wallet = require('./wallet')
+const Wallet = require('./wallet')
+const Promise = require('bluebird')
 
 module.exports = {
   create: function (issueId, offerId, numShares, price, hash) {
@@ -38,7 +39,7 @@ module.exports = {
                 "numShares": numShares
              }
              issue.all_holdings.push(holding)
-             wallet.updateWallet(userId, numShares, 'out')
+             Wallet.updateWallet(userId, numShares / 100, 'out')
              ApplicationStore.setIssue(offer.issueId, issue)
              const log = {
                "data": {
@@ -61,29 +62,41 @@ module.exports = {
       .then((offer) => {
         return ApplicationStore.getIssue(offer.issueId).then(
           (issue) =>{
-             if(!issue.all_holdings){
-               const all_holdings = issue.all_holdings
-               issue.all_holdings = null
-               ApplicationStore.setIssue(offer.issueId, issue);
-               all_holdings.forEach(function(holding){
-                 console.log('cancel holding from ' + holding.holder + ':' + holding.holdingId)
-                 //remove the wallet of each holder
-               })
-             }
-
+             const all_holdings = issue.all_holdings || new Array()
+             issue.all_holdings = new Array()
+             ApplicationStore.setIssue(offer.issueId, issue)
              const log = {
                "data": {
                  "id": offerId
                }
              }
              ApplicationStore.setLog(hash, log)
-             return {
-               "tx": {
-                 "hash": '0x' + hash
-               }
-             }
+             return all_holdings
           }, (error) => {throw error}
         )
       }, (error) => {throw error})
+      .then((all_holdings) => {
+
+        if(all_holdings && all_holdings.length > 0){
+          var promises = []
+          all_holdings.forEach(function(holding){
+            promises.push(new Promise((resolve, reject) => {
+              Wallet.updateWallet(holding.holder, holding.numShares/100, 'in')
+              resolve(holding)
+            }))
+          })
+          return Promise.all(promises)
+        }
+        else{
+          return
+        }
+      })
+      .then(() => {
+        return {
+          "tx": {
+            "hash": '0x' + hash
+          }
+        }
+      })
   }
 }

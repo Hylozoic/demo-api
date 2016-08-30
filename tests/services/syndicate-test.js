@@ -17,9 +17,9 @@ describe('Offers', function () {
   it('create a syndicate', function () {
     const res = Syndicate.create(issueId, offerId, hash);
     expect(res.tx.hash).to.equal('0x' + hash);
-    ApplicationStore.getLog(hash).then((log) => {
+    return ApplicationStore.getLog(hash).then((log) => {
       expect(log.data.id).to.equal(issueId)
-      ApplicationStore.getSyndicate(issueId).then((syndicate) => {
+      return ApplicationStore.getSyndicate(issueId).then((syndicate) => {
         expect(syndicate.offerId).to.equal(offerId)
         expect(syndicate.issueId).to.equal(issueId)
       }, (error) => {assert.fail(error)})
