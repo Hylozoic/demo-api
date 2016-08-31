@@ -96,8 +96,8 @@ module.exports = {
                   users[holding.holder] = 0
                 }
 
-                users[holding.holder] += holding.numShares
-                users[issue.issuer] -= holding.numShares
+                users[holding.holder] += parseFloat(holding.numShares)
+                users[issue.issuer] -= parseFloat(holding.numShares)
               })
 
               var promises = []
