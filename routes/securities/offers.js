@@ -2,6 +2,7 @@ var router = require('koa-router')();
 var config = require('../../config');
 var Offers = require('../../services/offers')
 const TransactionHelper = require('./../../services/transaction-helper');
+var unauthorised = require('../../test-data/unauthorised.json');
 
 router.post('/sell', function *(next) {
   const body = this.request.body

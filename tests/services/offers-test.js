@@ -8,21 +8,21 @@ const ApplicationStore = require('./../../services/application-store')
 const TransactionHelper = require('./../../services/transaction-helper')
 
 describe('Offers', function () {
-  var numShares, issueId, offerId, price, userId, syndicateId, holdingId, numSharesAccept;
+  var numShares, issueId, offerId, price, userId, issuerId, holdingId, numSharesAccept
   const exchangeRate = 1000000000000000000
 
   before(function () {
     numShares = 1000
     price = 0.01
     userId = 1
-    syndicateId = 2
+    issuerId = 2
     issueId = TransactionHelper.generateBigInt()
     offerId = TransactionHelper.generateBigInt()
     holdingId = TransactionHelper.generateBigInt()
     numSharesAccept = 100
-    Issues.create(numShares, TransactionHelper.generateTransactionHash(), issueId)
+    Issues.create(numShares, TransactionHelper.generateTransactionHash(), issueId, issuerId)
     Wallet.createWallet(userId, userId, 80 * exchangeRate)
-    Wallet.createWallet(syndicateId, syndicateId, 80 * exchangeRate)
+    Wallet.createWallet(issuerId, issuerId, 80 * exchangeRate)
   })
 
   it('create an offer', function () {
@@ -56,11 +56,12 @@ describe('Offers', function () {
           expect(issue.all_holdings[0].issueId).to.equal(issueId)
           expect(issue.all_holdings[0].numShares).to.equal(numSharesAccept)
 
-          return Wallet.getWallet(userId).then((wallet) => {
-            expect(wallet.walletDetails.latest.amount/exchangeRate).to.equal(80-(numSharesAccept/100))
-
-          }, (error) => {
-            assert.fail(error)})
+          return Promise.all([Wallet.getWallet(userId), Wallet.getWallet(issuerId)])
+            .then((wallets) => {
+              expect(wallets[0].walletDetails.latest.amount / exchangeRate).to.equal(80 - (numSharesAccept / 100))
+              expect(wallets[1].walletDetails.latest.amount / exchangeRate).to.equal(80 + (numSharesAccept / 100))
+            }, (error) => {
+              assert.fail(error)})
         }, (error) => {
           assert.fail(error)})
       }, (error) => {
@@ -69,17 +70,19 @@ describe('Offers', function () {
       assert.fail(error)})
   }),
 
-  it('cancel offer', function(){
+  it('cancel offer', function () {
     var hash = TransactionHelper.generateTransactionHash()
     return Offers.cancel(offerId, hash).then(() => {
       return ApplicationStore.getIssue(issueId).then((issue) => {
         expect(issue.all_holdings.length).to.equal(0)
-        return Wallet.getWallet(userId).then((wallet) => {
-          expect(wallet.walletDetails.latest.amount/exchangeRate).to.equal(80)
+        return Promise.all([Wallet.getWallet(userId), Wallet.getWallet(issuerId)])
+            .then((wallets) => {
+              expect(wallets[0].walletDetails.latest.amount / exchangeRate).to.equal(80)
+              expect(wallets[1].walletDetails.latest.amount / exchangeRate).to.equal(80)
         }, (error) => {
           assert.fail(error)})
-        }, (error) => {
-      assert.fail(error)})
+      }, (error) => {
+        assert.fail(error)})
     })
   })
 })

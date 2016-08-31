@@ -1,11 +1,12 @@
 const ApplicationStore = require('./application-store');
+var unauthorised = require('../test-data/unauthorised.json');
 
 module.exports = {
-  create: function(numShares, hash, issueId){
+  create: function(numShares, hash, issueId, issuer){
     const issue = {
       numShares: numShares,
       id: issueId,
-      issuer: ""
+      issuer: issuer
     }
     ApplicationStore.setIssue(issueId, issue)
     const log = {

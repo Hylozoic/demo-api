@@ -39,7 +39,7 @@ module.exports = {
                 "numShares": numShares
              }
              issue.all_holdings.push(holding)
-             Wallet.updateWallet(userId, numShares / 100, 'out')
+
              ApplicationStore.setIssue(offer.issueId, issue)
              const log = {
                "data": {
@@ -47,56 +47,74 @@ module.exports = {
                }
              }
              ApplicationStore.setLog(hash, log)
-             return {
-               "tx": {
-                 "hash": '0x' + hash
-               }
+
+             return [holding, issue, hash]
+        }, (error) => {throw error})
+        .spread((holding, issue, hash) => {
+          return Promise.all(
+              [Wallet.updateWallet(holding.holder, holding.numShares/100, 'out'),
+               Wallet.updateWallet(issue.issuer, holding.numShares/100, 'in'),
+               hash
+              ])
+          .then((values) => {
+            return values[2]
+          })
+        }, (error) => {throw error})
+        .then((hash) => {
+           return {
+             "tx": {
+               "hash": '0x' + hash
              }
-          }, (error) => {throw error}
-        )
-      }, (error) => {throw error})
+           }
+          }, (error) => {throw error})
+      })
   },
 
   cancel: function(offerId, hash){
     return ApplicationStore.getOffer(offerId)
       .then((offer) => {
-        return ApplicationStore.getIssue(offer.issueId).then(
-          (issue) =>{
-             const all_holdings = issue.all_holdings || new Array()
-             issue.all_holdings = new Array()
-             ApplicationStore.setIssue(offer.issueId, issue)
-             const log = {
-               "data": {
-                 "id": offerId
+          return ApplicationStore.getIssue(offer.issueId).then(
+            (issue) =>{
+               const all_holdings = issue.all_holdings || new Array()
+               issue.all_holdings = new Array()
+               ApplicationStore.setIssue(offer.issueId, issue)
+               const log = {
+                 "data": {
+                   "id": offerId
+                 }
                }
-             }
-             ApplicationStore.setLog(hash, log)
-             return all_holdings
-          }, (error) => {throw error}
-        )
-      }, (error) => {throw error})
-      .then((all_holdings) => {
+               ApplicationStore.setLog(hash, log)
+               return [all_holdings, issue, hash]
+            }, (error) => {throw error})
+          .spread((all_holdings, issue, hash) => {
+            if(all_holdings && all_holdings.length > 0){
+              var promises = []
+              all_holdings.forEach(function(holding){
+                promises.push(new Promise((resolve, reject) => {
+                  return Promise.all(
+                      [Wallet.updateWallet(holding.holder, holding.numShares/100, 'in'),
+                       Wallet.updateWallet(issue.issuer, holding.numShares/100, 'out')
+                     ])
+                  .then(() => {resolve(1)})
+                }))
+              })
 
-        if(all_holdings && all_holdings.length > 0){
-          var promises = []
-          all_holdings.forEach(function(holding){
-            promises.push(new Promise((resolve, reject) => {
-              Wallet.updateWallet(holding.holder, holding.numShares/100, 'in')
-              resolve(holding)
-            }))
-          })
-          return Promise.all(promises)
-        }
-        else{
-          return
-        }
-      })
-      .then(() => {
+              promises.push(hash)
+              return Promise.all(promises).then((values) => {
+                return values[values.length - 1]
+              })
+          }
+          else{
+            return hash
+          }
+        }, (error) => {throw error})
+      .then((hash) => {
         return {
           "tx": {
             "hash": '0x' + hash
           }
         }
-      })
+      }, (error) => {throw error})
+    }, (error) => {throw error})
   }
 }
