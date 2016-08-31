@@ -87,22 +87,36 @@ module.exports = {
                return [all_holdings, issue, hash]
             }, (error) => {throw error})
           .spread((all_holdings, issue, hash) => {
+            var users = {}
+            users[issue.issuer] = 0
+
             if(all_holdings && all_holdings.length > 0){
-              var promises = []
               all_holdings.forEach(function(holding){
-                promises.push(new Promise((resolve, reject) => {
-                  return Promise.all(
-                      [Wallet.updateWallet(holding.holder, holding.numShares/100, 'in'),
-                       Wallet.updateWallet(issue.issuer, holding.numShares/100, 'out')
-                     ])
-                  .then(() => {resolve(1)})
-                }))
+                if(!users[holding.holder]){
+                  users[holding.holder] = 0
+                }
+
+                users[holding.holder] += holding.numShares
+                users[issue.issuer] -= holding.numShares
               })
 
-              promises.push(hash)
-              return Promise.all(promises).then((values) => {
-                return values[values.length - 1]
+              var promises = []
+              Object.keys(users).forEach(function(key){
+                if(users[key] < 0){
+                  promises.push(new Promise((resolve, reject) => {
+                    Wallet.updateWallet(key, -users[key]/100, 'out')
+                    .then(() =>  { resolve() } )
+                  }))
+                }
+                else if(users[key] > 0){
+                  promises.push(new Promise((resolve, reject) => {
+                      Wallet.updateWallet(key, users[key]/100, 'in')
+                      .then(() => { resolve() } )
+                  }))
+                }
               })
+
+              return Promise.all(promises).then(() => {return hash})
           }
           else{
             return hash
