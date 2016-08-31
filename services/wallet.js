@@ -24,6 +24,9 @@ module.exports = {
     create(1, 9, 5000000000000000000000);
     create(2, 49, 3458967894567890987500);
     create(3, 78, 80000000000000000000);
+    create(3, 18, 1000000000000000000);
+    create(3, 27, 3918000000000000000000);
+    create(3, 35, 4032000000000000000000);
   },
 
   createWallet: function(walletId, userId, weiBalance){

@@ -7,6 +7,9 @@ var koa = require('koa')
 var contributor_authorised = require('../test-data/contributor_authorised.json');
 var manager_authorised = require('../test-data/manager_authorised.json');
 var owner_authorised = require('../test-data/owner_authorised.json');
+var jessie_authorised = require('../test-data/jessie_authorised.json');
+var courtney_authorised = require('../test-data/courtney_authorised.json');
+var rob_authorised = require('../test-data/rob_authorised.json');
 var app = module.exports = koa();
 
 var expectedTokenRequest = {
@@ -29,6 +32,9 @@ router.get('/authorise', function *(next) {
     projectContributorCallbackUrl: this.query.redirect_uri + '?code=' + config.contributorAuthCode,
     syndicateManagerCallbackUrl: this.query.redirect_uri + '?code=' + config.managerAuthCode,
     projectOwnerCallbackUrl: this.query.redirect_uri + '?code=' + config.ownerAuthCode,
+    JessieOwnerCallbackUrl: this.query.redirect_uri + '?code=' + config.JessieAuthCode,
+    CourtneyOwnerCallbackUrl: this.query.redirect_uri + '?code=' + config.CourtneyAuthCode,
+    RobOwnerCallbackUrl: this.query.redirect_uri + '?code=' + config.RobAuthCode,
     failureUrl: this.query.redirect_uri + '?code=' + config.invalidAuthCode
   });
 });
@@ -63,6 +69,12 @@ router.post('/token', function * (next) {
       this.body = owner_authorised
     } else if (body.code === config.managerAuthCode) {
       this.body = manager_authorised
+    } else if (body.code === config.JessieAuthCode) {
+      this.body = jessie_authorised
+    } else if (body.code === config.CourtneyAuthCode) {
+      this.body = courtney_authorised
+    } else if (body.code === config.RobAuthCode) {
+      this.body = rob_authorised
     } else if (body.code === config.invalidAuthCode) {
       this.status = 400
       this.body = {error: 'unauthorised_client'}

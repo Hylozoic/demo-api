@@ -4,7 +4,8 @@ var userDetails = require('../test-data/user-details.json');
 var unauthorised = require('../test-data/unauthorised.json');
 
 function getUserByType(type) {
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 6; i++) {
+
     if(userDetails.users[i].last_name === type) {
       return userDetails.users[i]
     }
@@ -18,6 +19,12 @@ router.get('/', function *(next) {
     this.body = getUserByType('Contributor');
   } else if(this.headers['authorization'] === config.ManagerBearerToken){
     this.body = getUserByType('Manager');
+  } else if(this.headers['authorization'] === config.JessieBearerToken){
+    this.body = getUserByType('Jessie');
+  } else if(this.headers['authorization'] === config.CourtneyBearerToken){
+    this.body = getUserByType('Courtney');
+  } else if(this.headers['authorization'] === config.RobBearerToken){
+    this.body = getUserByType('Rob');
   } else {
     this.status = config.unauthorised;
     this.body = unauthorised;

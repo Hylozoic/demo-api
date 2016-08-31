@@ -18,6 +18,12 @@ router.get('/balances', function *(next) {
     this.body = (yield getUserWallet(78)).walletDetails
   } else if (bearer === config.ManagerBearerToken) {
     this.body = (yield getUserWallet(9)).walletDetails
+  } else if (bearer === config.JessieBearerToken) {
+    this.body = (yield getUserWallet(18)).walletDetails
+  } else if (bearer === config.CourtneyBearerToken) {
+    this.body = (yield getUserWallet(27)).walletDetails
+  } else if (bearer === config.RobBearerToken) {
+    this.body = (yield getUserWallet(35)).walletDetails
   } else {
         this.status = config.unauthorised;
         this.body = unauthorised;

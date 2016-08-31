@@ -23,6 +23,15 @@ router.post('/onboard-funds', function *(next) {
   } else if (bearer === config.ManagerBearerToken) {
     yield wallet.updateWallet(9, amount, 'in')
     this.status = 200
+  } else if (bearer === config.JessieBearerToken) {
+    yield wallet.updateWallet(18, amount, 'in')
+    this.status = 200
+  } else if (bearer === config.CourtneyBearerToken) {
+    yield wallet.updateWallet(27, amount, 'in')
+    this.status = 200
+  } else if (bearer === config.RobBearerToken) {
+    yield wallet.updateWallet(35, amount, 'in')
+    this.status = 200
   } else {
     this.status = config.unauthorised;
     this.body = unauthorised;
