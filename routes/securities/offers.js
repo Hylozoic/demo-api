@@ -38,7 +38,8 @@ router.get('/accept/partial/:offerId/:numShares', function * (next) {
   const holdingId = TransactionHelper.generateBigInt()
 
   this.status = config.okResponse;
-  this.body = yield Offers.acceptPartial(userId, params.offerId, params.numShares, holdingId, hash);
+
+  this.body = yield Offers.acceptPartial(user_id, params.offerId, params.numShares, holdingId, hash);
 });
 
 router.delete('/cancel/:offerId', function * (next){
