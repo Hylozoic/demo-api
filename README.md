@@ -34,3 +34,4 @@ The API has many endpoints for different functionality, an endpoint can be reach
 ```
 http://localhost:3000/api/stabletoken/balances
 ```
+A majority of the endpoint require an authorisation token which can be obtained through the built in OAuth flow.
