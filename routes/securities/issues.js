@@ -12,6 +12,12 @@ router.post('/', function *(next) {
     isserId = 78
   } else if (bearer === config.ManagerBearerToken) {
     isserId = 9
+  } else if (bearer === config.JessieBearerToken) {
+    user_id = 18
+  } else if (bearer === config.CourtneyBearerToken) {
+    user_id = 27
+  } else if (bearer === config.RobBearerToken) {
+    user_id = 35
   } else {
     this.status = config.unauthorised;
     this.body = unauthorised;
