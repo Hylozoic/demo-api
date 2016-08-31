@@ -16,11 +16,11 @@ router.post('/sell', function *(next) {
 
 router.get('/accept/partial/:offerId/:numShares', function * (next) {
   var bearer = this.headers['authorization'];
-  var userId;
+  var user_id;
   if (bearer === config.ContributorBearerToken) {
-    userId = 49
+    user_id = 49
   } else if (bearer === config.OwnerBearerToken) {
-    userId = 78
+    user_id = 78
   } else if (bearer === config.ManagerBearerToken) {
     user_id = 9
   } else if (bearer === config.JessieBearerToken) {
