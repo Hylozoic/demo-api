@@ -1,10 +1,10 @@
 var router = require('koa-router')();
-var authorized = require('./authorize')
+var authorised = require('./authorise')
 
 var config = require('../config');
 var pending = require('../test-data/pending.json');
 var settled = require('../test-data/settled.json');
-var unauthorized = require('../test-data/unauthorized.json');
+var unauthorised = require('../test-data/unauthorised.json');
 var wallet = require('../services/wallet')
 
 function getUserWallet (userId) {
@@ -14,7 +14,7 @@ function getUserWallet (userId) {
 router.post('/onboard-funds', function *(next) {
   var amount = this.headers['amount']
   var bearer = this.headers['authorization'];
-  if (bearer === config.ContributorBearerToken) {
+  if (bearer === config.ContributorBearerTokenCode) {
     yield wallet.updateWallet(49, amount, 'in')
     this.status = 200
   } else if (bearer === config.OwnerBearerToken) {
@@ -33,8 +33,8 @@ router.post('/onboard-funds', function *(next) {
     yield wallet.updateWallet(35, amount, 'in')
     this.status = 200
   } else {
-    this.status = config.unauthorized;
-    this.body = unauthorized;
+    this.status = config.unauthorised;
+    this.body = unauthorised;
   }
 });
 

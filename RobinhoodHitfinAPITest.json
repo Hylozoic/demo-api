@@ -313,7 +313,7 @@
 				}
 			],
 			"request": {
-				"url": "http://hitfin-fake.herokuapp.com/oauth/authorize",
+				"url": "http://hitfin-fake.herokuapp.com/oauth/authorise",
 				"method": "GET",
 				"header": [
 					{

@@ -1,7 +1,7 @@
 var router = require('koa-router')();
 var config = require('../config');
 var userDetails = require('../test-data/user-details.json');
-var unauthorized = require('../test-data/unauthorized.json');
+var unauthorised = require('../test-data/unauthorised.json');
 
 function getUserByType(type) {
   for (var i = 0; i < 6; i++) {
@@ -26,8 +26,8 @@ router.get('/', function *(next) {
   } else if(this.headers['authorization'] === config.RobBearerToken){
     this.body = getUserByType('Rob');
   } else {
-    this.status = config.unauthorized;
-    this.body = unauthorized;
+    this.status = config.unauthorised;
+    this.body = unauthorised;
   }
 });
 

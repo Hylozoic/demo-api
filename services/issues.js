@@ -1,5 +1,5 @@
 const ApplicationStore = require('./application-store');
-var unauthorized = require('../test-data/unauthorized.json');
+var unauthorised = require('../test-data/unauthorised.json');
 
 module.exports = {
   create: function(numShares, hash, issueId, issuer){

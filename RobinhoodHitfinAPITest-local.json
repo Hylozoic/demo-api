@@ -313,7 +313,7 @@
 				}
 			],
 			"request": {
-				"url": "localhost:3000/oauth/authorize",
+				"url": "localhost:3000/oauth/authorise",
 				"method": "GET",
 				"header": [
 					{
