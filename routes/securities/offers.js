@@ -2,7 +2,7 @@ var router = require('koa-router')();
 var config = require('../../config');
 var Offers = require('../../services/offers')
 const TransactionHelper = require('./../../services/transaction-helper');
-var unauthorised = require('../../test-data/unauthorised.json');
+var unauthorized = require('../../test-data/unauthorized.json');
 
 router.post('/sell', function *(next) {
   const body = this.request.body
@@ -30,8 +30,8 @@ router.get('/accept/partial/:offerId/:numShares', function * (next) {
   } else if (bearer === config.RobBearerToken) {
     user_id = 35
   } else {
-    this.status = config.unauthorised;
-    this.body = unauthorised;
+    this.status = config.unauthorized;
+    this.body = unauthorized;
   }
   const params = this.params
   const hash = TransactionHelper.generateTransactionHash()

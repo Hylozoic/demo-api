@@ -21,8 +21,8 @@ router.post('/', function *(next) {
   } else if (bearer === config.RobBearerToken) {
     issuer_id = 35
   } else {
-    this.status = config.unauthorised;
-    this.body = unauthorised;
+    this.status = config.unauthorized;
+    this.body = unauthorized;
   }
 
   const body = this.request.body

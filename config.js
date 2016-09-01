@@ -8,7 +8,7 @@ module.exports = {
   orderId: 48,
   buy: 1,
   sell: 2,
-  unauthorised: 401,
+  unauthorized: 401,
   successfulPost: 201,
   okResponse: 200,
   ownerAuthCode: 'AUTH_CODE_TO_OBTAIN_A_OWNER_TOKEN',

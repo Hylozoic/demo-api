@@ -2,14 +2,14 @@ var router = require('koa-router')()
 var config = require('../config')
 var views = require('co-views')
 var logger = require('koa-logger')
-var authorised = require('./authorise')
+var authorized = require('./authorize')
 var koa = require('koa')
-var contributor_authorised = require('../test-data/contributor_authorised.json');
-var manager_authorised = require('../test-data/manager_authorised.json');
-var owner_authorised = require('../test-data/owner_authorised.json');
-var jessie_authorised = require('../test-data/jessie_authorised.json');
-var courtney_authorised = require('../test-data/courtney_authorised.json');
-var rob_authorised = require('../test-data/rob_authorised.json');
+var contributor_authorized = require('../test-data/contributor_authorized.json');
+var manager_authorized = require('../test-data/manager_authorized.json');
+var owner_authorized = require('../test-data/owner_authorized.json');
+var jessie_authorized = require('../test-data/jessie_authorized.json');
+var courtney_authorized = require('../test-data/courtney_authorized.json');
+var rob_authorized = require('../test-data/rob_authorized.json');
 var app = module.exports = koa();
 
 var expectedTokenRequest = {
@@ -27,7 +27,7 @@ var syndicateTokenRequest = {
 
 var render = views(__dirname + '/../views', { ext: 'ejs' })
 
-router.get('/authorise', function *(next) {
+router.get('/authorize', function *(next) {
   this.body= yield render('login', {
     projectContributorCallbackUrl: this.query.redirect_uri + '?code=' + config.contributorAuthCode,
     syndicateManagerCallbackUrl: this.query.redirect_uri + '?code=' + config.managerAuthCode,
@@ -49,7 +49,7 @@ router.post('/token', function * (next) {
     body.grant_type === syndicateTokenRequest.grant_type &&
     body.client_secret === syndicateTokenRequest.client_secret) {
     this.status = 200
-    this.body = manager_authorised
+    this.body = manager_authorized
   }
   else if (
     body.client_id !== expectedTokenRequest.client_id ||
@@ -64,20 +64,20 @@ router.post('/token', function * (next) {
     return
   }else {
     if (body.code === config.contributorAuthCode) {
-      this.body = contributor_authorised
+      this.body = contributor_authorized
     } else if (body.code === config.ownerAuthCode) {
-      this.body = owner_authorised
+      this.body = owner_authorized
     } else if (body.code === config.managerAuthCode) {
-      this.body = manager_authorised
+      this.body = manager_authorized
     } else if (body.code === config.JessieAuthCode) {
-      this.body = jessie_authorised
+      this.body = jessie_authorized
     } else if (body.code === config.CourtneyAuthCode) {
-      this.body = courtney_authorised
+      this.body = courtney_authorized
     } else if (body.code === config.RobAuthCode) {
-      this.body = rob_authorised
+      this.body = rob_authorized
     } else if (body.code === config.invalidAuthCode) {
       this.status = 400
-      this.body = {error: 'unauthorised_client'}
+      this.body = {error: 'unauthorized_client'}
     }
   }
 });

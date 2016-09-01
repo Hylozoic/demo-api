@@ -1,7 +1,7 @@
 var config = require('../config');
 
 module.exports = {
-  isAuthorised: function(token) {
+  isauthorized: function(token) {
     if (token === config.OwnerBearerToken || token === config.ContributorBearerToken || token === config.ManagerBearerToken)
       return true
     else {

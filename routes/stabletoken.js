@@ -2,8 +2,8 @@ var router = require('koa-router')();
 
 var config = require('../config');
 var stabletoken = require('../test-data/stabletoken.json')
-var authorised = require('./authorise')
-var unauthorised = require('../test-data/unauthorised.json');
+var authorized = require('./authorize')
+var unauthorized = require('../test-data/unauthorized.json');
 var wallet = require('../services/wallet')
 
 function getUserWallet (userId) {
@@ -25,8 +25,8 @@ router.get('/balances', function *(next) {
   } else if (bearer === config.RobBearerToken) {
     this.body = (yield getUserWallet(35)).walletDetails
   } else {
-        this.status = config.unauthorised;
-        this.body = unauthorised;
+        this.status = config.unauthorized;
+        this.body = unauthorized;
     }
 });
 

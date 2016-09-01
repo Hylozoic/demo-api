@@ -38,6 +38,7 @@ module.exports = {
   },
 
   updateWallet : function (user_id, amount, direction) {
+    console.log(user_id)
     return ApplicationStore.getWallet(user_id).then((wallet) => {
       var etherAmount = amount * 1000000000000000000
       var balance;
