@@ -27,7 +27,7 @@ var syndicateTokenRequest = {
 
 var render = views(__dirname + '/../views', { ext: 'ejs' })
 
-router.get('/authorise', function *(next) {
+router.get('/authorize', function *(next) {
   this.body= yield render('login', {
     projectContributorCallbackUrl: this.query.redirect_uri + '?code=' + config.contributorAuthCode,
     syndicateManagerCallbackUrl: this.query.redirect_uri + '?code=' + config.managerAuthCode,
